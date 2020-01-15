@@ -8,7 +8,7 @@ pipeline {
       args "-u root -v /var/run/docker.sock:/var/run/docker.sock --entrypoint=''"
     }
   }
-stages {
+  stages {
     stage('Moving .snowsql to workspace and replacing snowsql in /bin') {
         steps {
             sh '''
@@ -18,7 +18,7 @@ stages {
             ''' 
         }
     }
-stage('Deploy changes') {
+    stage('Deploy changes') {
       steps {
         withCredentials(bindings: [usernamePassword(credentialsId: 'snowflake_creds', usernameVariable: 'USERNAME', passwordVariable: 'PASSWORD')]) {
           sh '''
@@ -27,7 +27,7 @@ stage('Deploy changes') {
         }
       }
     }
-stage('Verify changes') {
+    stage('Verify changes') {
       steps {
         withCredentials(bindings: [usernamePassword(credentialsId: 'snowflake_creds', usernameVariable: 'USERNAME', passwordVariable: 'PASSWORD')]) {
           sh '''
@@ -35,7 +35,7 @@ stage('Verify changes') {
               ''' 
         }
       }
-post {
+    post {
     always {
       sh 'chmod -R 777 .'
     }
