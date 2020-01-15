@@ -40,3 +40,6 @@ pipeline {
       sh 'chmod -R 777 .'
     }
   }
+}
+
+        
