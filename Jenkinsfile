@@ -1,4 +1,4 @@
-/* Hello World in Groovy */
+/* Jenkinsfile in Groovy */
 pipeline {
     options {
         timeout(time: 1, unit: 'HOURS')
