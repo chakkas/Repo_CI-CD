@@ -39,14 +39,14 @@ pipeline {
               sqitch verify "db:snowflake://$USERNAME:$PASSWORD@hashmap.snowflakecomputing.com/flipr?Driver=Snowflake;warehouse=sqitch_wh"
               ''' 
         }
-      }
+      
     }
     post {
     always {
       sh 'chmod -R 777 .'
     }
   }
-
+}
     
 }
     
