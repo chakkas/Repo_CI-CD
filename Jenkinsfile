@@ -1,22 +1,28 @@
+/* Hello World in Groovy */
 pipeline {
     options {
-      timeout(time: 1, unit: 'HOURS') 
-  }
-  agent {
-    docker {
-      image 'hashmapinc/sqitch:jenkins'
-      args "-u root -v /var/run/docker.sock:/var/run/docker.sock --entrypoint=''"
+        timeout(time: 1, unit: 'HOURS')
+        
     }
-  }
-  stages {
-    stage('Moving .snowsql to workspace and replacing snowsql in /bin') {
-        steps {
+    agent {
+        docker {
+            image 'hashmapinc/sqitch:jenkins'
+            args "-u root -v /var/run/docker.sock:/var/run/docker.sock --entrypoint=''"
+            
+        }
+        
+    }
+    stages {
+        stage('Moving .snowsql to workspace and replacing snowsql in /bin') {
+            steps {
             sh '''
             rm /bin/snowsql 
             mv /var/snowsql /bin/
             mv /var/.snowsql ./
             ''' 
         }
+    }
+        
     }
     stage('Deploy changes') {
       steps {
@@ -35,11 +41,12 @@ pipeline {
               ''' 
         }
       }
+    }
     post {
     always {
       sh 'chmod -R 777 .'
     }
   }
-}
 
-        
+    
+}
