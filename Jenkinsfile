@@ -15,7 +15,7 @@ stages {
             sh 'snowsql --help'
         }
     }
-    stage('Deploy changes') {
+    stage('SnowSQL Status ') {
     steps {
         withCredentials(bindings: [usernamePassword(credentialsId: 'snowflake_creds', usernameVariable: 'USERNAME', passwordVariable: 'PASSWORD')]) {
         sh '''
