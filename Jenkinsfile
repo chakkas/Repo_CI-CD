@@ -17,18 +17,18 @@ stages {
     }
     stage('Deploy changes') {
     steps {
-        withCredentials(bindings: [usernamePassword(credentialsId: 'snowflake_personal', usernameVariable: 'USERNAME', passwordVariable: 'PASSWORD')]) {
+        withCredentials(bindings: [usernamePassword(credentialsId: 'snowflake_creds', usernameVariable: 'USERNAME', passwordVariable: 'PASSWORD')]) {
         sh '''
-            sqitch deploy "db:snowflake://$USERNAME:$PASSWORD@uba44969.snowflakecomputing.com/flipr?Driver=Snowflake;warehouse=sqitch_wh"
+            sqitch deploy "db:snowflake://$USERNAME:$PASSWORD@tailoredbrandsdev.us-east-1.snowflakecomputing.com/flipr?Driver=Snowflake;warehouse=sqitch_wh"
             '''
         }
     }
     }
     stage('Verify changes') {
     steps {
-        withCredentials(bindings: [usernamePassword(credentialsId: 'snowflake_personal', usernameVariable: 'USERNAME', passwordVariable: 'PASSWORD')]) {
+        withCredentials(bindings: [usernamePassword(credentialsId: 'snowflake_creds', usernameVariable: 'USERNAME', passwordVariable: 'PASSWORD')]) {
         sh '''
-            sqitch verify "db:snowflake://$USERNAME:$PASSWORD@uba44969.snowflakecomputing.com/flipr?Driver=Snowflake;warehouse=sqitch_wh"
+            sqitch verify "db:snowflake://$USERNAME:$PASSWORD@tailoredbrandsdev.us-east-1.snowflakecomputing.com/flipr?Driver=Snowflake;warehouse=sqitch_wh"
             '''
         }
     }
