@@ -19,7 +19,7 @@ stages {
     steps {
         withCredentials(bindings: [usernamePassword(credentialsId: 'snowflake_creds', usernameVariable: 'USERNAME', passwordVariable: 'PASSWORD')]) {
         sh '''
-            sqitch deploy "db:snowflake://$USERNAME:$PASSWORD@tailoredbrandsdev.us-east-1.snowflakecomputing.com/flipr?Driver=Snowflake;warehouse=sqitch_wh"
+            sqitch deploy "db:snowflake://$USERNAME:$PASSWORD@tailoredbrandsdev.us-east-1.snowflakecomputing.com/flipr?Driver=Snowflake;warehouse=DEMO_WH"
             '''
         }
     }
@@ -28,7 +28,7 @@ stages {
     steps {
         withCredentials(bindings: [usernamePassword(credentialsId: 'snowflake_creds', usernameVariable: 'USERNAME', passwordVariable: 'PASSWORD')]) {
         sh '''
-            sqitch verify "db:snowflake://$USERNAME:$PASSWORD@tailoredbrandsdev.us-east-1.snowflakecomputing.com/flipr?Driver=Snowflake;warehouse=sqitch_wh"
+            sqitch verify "db:snowflake://$USERNAME:$PASSWORD@tailoredbrandsdev.us-east-1.snowflakecomputing.com/flipr?Driver=Snowflake;warehouse=DEMO_WH"
             '''
         }
     }
